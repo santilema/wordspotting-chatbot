@@ -1,2 +1,0 @@
-# hospital_chatbot
-chatbot
