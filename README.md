@@ -6,7 +6,7 @@
 ## 3. To push your changes to the repo follow the steps:
           #  git add .
           #  git commit -m "name your commit"
-          #. git push origin main
+          #. git push origin master
 
 
 
