@@ -1,0 +1,22 @@
+.header{
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.3px;
+}
+.header img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.right{
+    margin-left: 10px;
+}
+.name{
+    font-weight: normal;
+    font-size: 1.3em;
+}
+.status{
+    font-weight: 500;
+    color: #363062;
+}
