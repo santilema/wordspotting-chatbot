@@ -2,6 +2,11 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.3px;
+    width: 100%;
+    border-bottom: 1.3px solid gray;
+    background-color: #000066;
+    color: white;
+    padding: .6rem .6rem;
 }
 .header img{
     width: 60px;
@@ -14,9 +19,9 @@
 }
 .name{
     font-weight: normal;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 .status{
     font-weight: 500;
-    color: #363062;
+    color: #615a93;
 }

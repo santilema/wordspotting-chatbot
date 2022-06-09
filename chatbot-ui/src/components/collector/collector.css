@@ -1,0 +1,39 @@
+.collector {
+    display: flex;
+    margin: 3rem;
+}
+
+.bot-body {
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+.part-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.icon {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-left: 1rem;
+}
+
+.bot-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    width: 4rem;
+    background-color: white;
+    font-size: 2rem;
+    color: rgb(13, 13, 78);
+    border-radius: 50%;
+}

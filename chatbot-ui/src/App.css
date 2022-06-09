@@ -1,29 +1,11 @@
-.App{
+.app {
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  
+  justify-content: end;
+  align-items: end;
+  background-image: url("./images/main_background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-.wrapper{
-  width: 100%;
-  max-width: 500px;
-  padding: 30px 30px;
-  background: #fdfdfe;
-  border-radius: 20px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-  max-height: 800px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

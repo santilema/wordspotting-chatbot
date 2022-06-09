@@ -1,30 +1,17 @@
-
 import './App.css';
-import Bottom from './components/bottom/Bottom';
-// import image from './images/background_img.jpeg'
-
-import Header from './components/header/Header';
-// import Introduction from './components/introduction/Introduction';
-import Main from './components/main/Main';
-
+import Collector from './components/collector/collector';
+import { useState } from "react"
 
 function App() {
+    const [size, setSize] = useState(true)
+    const handleClick = () => {
+      setSize(!size)
+    }
     return (
-    <div className="App">
-        
-      <div className='wrapper'>
-        
-        <div className='content'>
-          
-          <Header />
-          <Main />
-          <Bottom />
-          
-          
-        </div>
+      <div className="app">
+         <Collector size = {size} handleClick = {handleClick} />
       </div>
-    </div>
-  );
+    );
 }
 
 export default App;
