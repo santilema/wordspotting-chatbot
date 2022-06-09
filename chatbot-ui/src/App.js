@@ -1,25 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import Collector from './components/collector/collector';
+import { useState } from "react"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [size, setSize] = useState(true)
+    const handleClick = () => {
+      setSize(!size)
+    }
+    return (
+      <div className="app">
+         <Collector size = {size} handleClick = {handleClick} />
+      </div>
+    );
 }
 
 export default App;
