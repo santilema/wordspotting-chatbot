@@ -10,7 +10,7 @@
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    transition: all 0.5s ease;
+    /* transition: all 0.5s ease; */
 }
 .part-main {
     display: flex;
@@ -38,10 +38,6 @@
     border-radius: 50%;
 }
 
-.first, .second {
-    transition: all .5s ease;
-}
-
 @media only screen and (max-width: 540px) {
     .collector{
         margin:0;
@@ -58,6 +54,7 @@
     }
 
     .bot-body {
+        border-radius: 0;
         width: 100vw;
         height: 100vh;
     }
