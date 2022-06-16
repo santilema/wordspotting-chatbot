@@ -7,9 +7,9 @@
  1. Clone the repo first ---> git clone "your branch url"
  2. Do your changes.
  3. To push your changes to the repo follow the steps:
-            git add .
-            git commit -m "name your commit"
-            git push origin "branch name"
+           # git add .
+           # git commit -m "name your commit"
+           # git push origin "branch name"
 
 
 
