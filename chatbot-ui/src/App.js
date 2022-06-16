@@ -7,6 +7,7 @@ function App() {
     const handleClick = () => {
       setSize(!size)
     }
+    
     return (
       <div className="app">
          <Collector size = {size} handleClick = {handleClick} />

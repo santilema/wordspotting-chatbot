@@ -3,6 +3,7 @@ import Bottom from '../bottom/Bottom'
 import Header from '../header/Header'
 import Main from '../main/Main'
 import { AiFillMessage as BotClosed, AiOutlineMessage as BotOpen } from "react-icons/ai";
+// import {BiBot} from 'react-icons/bi'
 import "./collector.css"
 
 const Collector = ({handleClick, size}) => {
@@ -19,9 +20,9 @@ const Collector = ({handleClick, size}) => {
       <div className="icon">
         <div className="bot-icon" onClick={handleClick}>
           {size ? (
-            <BotOpen className="bot-btn" />
+            <BotOpen className="bot-btn first" />
           ) : (
-            <BotClosed className="bot-btn" />
+            <BotClosed className="bot-btn second" />
           )}
         </div>
       </div>
