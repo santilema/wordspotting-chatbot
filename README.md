@@ -23,7 +23,10 @@
 
 
 ### REACT app 
-
+ The app was created with the help of ``` npx create-react-app <app name> ```
+ #### How to run:
  first install all dependencies, in your terminal(make sure you are inside of react app directory) type "npm i" or "npm install"
 
 * to run the react app run "npm start" in the app directory
+
+### Express
