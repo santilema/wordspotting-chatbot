@@ -10,10 +10,34 @@ const conversation = {
         level: 0,
         conversationFlow: [
             {
+                sentenceId: "pick-up",
+                content: "Do you have to pick-up some study-results?",
+                expect: ["pick", "up", "collect", "results", "result"],
+                level: 1,
+                conversationFlow: [
+                    {
+                        sentenceId: "pick-up-verify",
+                        content: "please, write down your email to check if your results are available already",
+                        expect: ["yes", "please", "sure", "ok", "okay", "affirmative", "y", "yeah", "exactly", "yep", "right"],
+                        level: 2,
+                        conversationFlow: [
+                            { 
+                                sentenceId: "pick-up-success",
+                                content: "Your results are ready. You can pick them up on reception from 8:00 to 17:00 everyday",
+                                //expect: email
+                                level: 3,
+                                direct: "base" 
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 sentenceId: "loc",
                 content: "The hospital is located on Example Street 123. Attention 24 hours for emergencies. Please, consult opening hours for specific departments",
-                expect: ["street", "location", "where", "entrance", "access", "open", "opening", "schedule", "direction", "address"],
+                expect: ["street", "location", "located", "where", "entrance", "access", "open", "opening", "schedule", "direction", "address"],
                 level: 1,
+                direct: "base"
 
             },
             {
@@ -25,22 +49,28 @@ const conversation = {
                     {
                         sentenceId: "appo-type",
                         content: `The following departments are taking online turns:\n${availableDepartments}\nFor which would you like to book yout appointment?`,
-                        expect: ["yes", "please", "sure", "ok", "okay"],
+                        expect: ["yes", "please", "sure", "ok", "okay", "affirmative", "y", "yeah", "exactly", "yep", "right"],
                         level: 2,
                         conversationFlow: [
                             {
                                 sentenceId: "appo-avail",
                                 content: `These are the available dates:\n${availableDates}\nPlease, select one date`,
                                 expect: availableDepartments,
+                                level: 3,
                                 conversationFlow: [
                                     {
                                         sentenceId: "appo-email",
                                         content: `Great! To finish with your booking I'll have to ask you for an email`,
                                         expect: availableDates,
+                                        level: 4,
                                         conversationFlow: [
-                                    {
-                                        
-                                    }
+                                            {
+                                                sentenceId: "appo-success",
+                                                content: "Your appointment was registered :)",
+                                                //expect: email
+                                                level: 5,
+                                                direct: "base"
+                                            }
                                 ]
                                     }
                                 ]
@@ -53,7 +83,7 @@ const conversation = {
     };
 
 function talk(conver, userMessage, iteration){
-    const messageWords = userMessage.toLowerCase().replace(/[,.]/,"").split(' '); //converts message into array of words
+    const messageWords = userMessage.toLowerCase().replace(/[,.?!]/,"").split(' '); //converts message into array of words
     let depth = 0;
     let heighestScore = 0;
     let selectedPath;
@@ -101,4 +131,4 @@ function someFancyLogic(inMessage) {
     console.log(responseObject.outMessageText);
 }
 
-someFancyLogic("I'd like to make an appointment");
+someFancyLogic("I have to pick up some studies");
