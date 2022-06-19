@@ -5,8 +5,10 @@
  Everyone has his/her own branch, We all work inside our own branches.
 
  1. Clone the repo first ---> git clone "your branch url"
- 2. Do your changes.
- 3. To push your changes to the repo follow the steps:
+ 2. Switch to your branch by:
+  ```git checkout <your branch name> ```
+ 4. Do your changes.
+ 5. To push your changes to the repo follow the steps:
   * git
   ```sh
             git add .
