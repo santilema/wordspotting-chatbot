@@ -1,9 +1,46 @@
 import React from 'react'
-import './main.css'
+import styled from 'styled-components'
+
+const MainWrap = styled.div`
+  .main{
+    margin: 30px 0 0;
+  }
+  .messages{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+
+
+  .bot-messages {
+      min-width: 60px;
+      max-width: 50%;
+      padding: 5px 7px;
+      text-align: center;
+      background-color: #EDECED;
+      font-style: 1.1em;
+      border-radius: 10px 10px 10px 0px;
+      margin: 0 10px;
+  }
+  .human-messages{
+      min-width: 60px;
+      max-width: 50%;
+      padding: 5px;
+      text-align: center;
+      background-color: #000066;
+      color: #EDECED;
+      font-style: 1.1em;
+      border-radius: 10px 10px 0 10px;
+      margin: 0 10px;
+      position: relative;
+      top: 80px;
+      margin-bottom: 20px;
+  }
+`
 
 const Main = () => {
   return (
-    <div>
+    <MainWrap>
       <div className="main">
         <div className="main_content">
           <div className="messages">
@@ -22,7 +59,7 @@ const Main = () => {
           </div>
         </div>
       </div>
-    </div>
+    </MainWrap>
   );
 }
 
