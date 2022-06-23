@@ -7,7 +7,7 @@ const Bottom = () => {
     <div className='bottom'>
         <div className="bottom-body">
           <div className="input-wrap">
-            <input type="text" name="input" placeholder='write your message'/>
+            <input type="text" name="input" placeholder='Write your message'/>
           </div>
           <div className="btn">
             <Send />

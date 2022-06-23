@@ -1,7 +1,7 @@
 import React from 'react'
-import Bottom from '../bottom/Bottom'
-import Header from '../header/Header'
-import Main from '../main/Main'
+import Bottom from '../bottom'
+import Header from '../header'
+import Main from '../main'
 import { AiFillMessage as BotClosed, AiOutlineMessage as BotOpen } from "react-icons/ai";
 // import {BiBot} from 'react-icons/bi'
 import "./collector.css"
