@@ -1,15 +1,22 @@
 import React from "react";
 import image from "../../assets/background_img.jpeg";
 import styled from "styled-components";
+import {GrClose as CloseIcon} from "react-icons/gr"
+
 
 const HeaderWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000066;
+
   .header {
     display: flex;
     align-items: center;
     letter-spacing: 0.3px;
     width: 100%;
     border-bottom: 1.3px solid gray;
-    background-color: #000066;
+
     color: white;
     padding: 0.6rem 0.6rem;
 
@@ -32,6 +39,15 @@ const HeaderWrap = styled.div`
     font-weight: 500;
     color: #615a93;
   }
+  .exit-icon {
+    padding: 2rem;
+    color: white;
+
+    .icon {
+      font-size: 2rem;
+      color: white !important;
+    }
+  }
 `;
 
 const Header = () => {
@@ -45,6 +61,9 @@ const Header = () => {
           <div className="name">Chatbot</div>
           <div className="status">Active</div>
         </div>
+      </div>
+      <div className="exit-icon">
+        <CloseIcon className="icon"/>
       </div>
     </HeaderWrap>
   );

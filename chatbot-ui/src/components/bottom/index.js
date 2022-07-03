@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import "./bottom.css";
 import { RiSendPlaneFill as Send } from "react-icons/ri";
 import styled from "styled-components";
@@ -14,6 +14,7 @@ const BottomWrap = styled.div`
   }
 
   .input-wrap {
+    width: 100%;
     flex: 3;
     display: flex;
     background-color: #fff;
@@ -45,16 +46,22 @@ const BottomWrap = styled.div`
   }
 `;
 
-const Bottom = () => {
+const Bottom = ({handleAnswerClick}) => {
+  const [msg, setMsg] = useState("");
+  
+  const handleChange = (e) => {
+    setMsg(e.target.value)
+  }
+
   return (
     <BottomWrap>
       <div className="bottom-body">
         <div className="input-wrap">
-          <input type="text" name="input" placeholder="Write your message" />
+          <input type="text" name="input" placeholder="Write your message" value={msg} onChange={handleChange}/>
         </div>
         <div className="btn">
           <Send />
-          <button>Send</button>
+          <button onClick={e => handleAnswerClick(msg)}>Send</button>
         </div>
       </div>
     </BottomWrap>

@@ -10,7 +10,6 @@ const InfoWrap = styled.div`
   left: 0;
   z-index: 1;
   background-color: #000044;
-  border-radius: 10px;
   text-align: center;
   opacity: 0.8;
   color: white;
