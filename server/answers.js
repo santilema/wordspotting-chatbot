@@ -1,4 +1,4 @@
-const prompt = require("prompt-sync")();
+// const prompt = require("prompt-sync")();
 
 // pre-defined data
 const affirmativeResponses = [
@@ -20,7 +20,7 @@ const availableDates = ["05/08/2022", "06/08/2022", "07/08/2022"];
 const availableDepartments = ['neurology', 'paedriatrics', 'psychiatry', 'cardiology']
 
 // Initial conversation tree
-const conversationRaw = {
+export const conversationRaw = {
   sentencecId: "base",
   mainPhrase: "Hi my name is Hospi, how can I help you?",
   secondPhrase: "Is there anything else I can help with?",
@@ -222,12 +222,14 @@ function assignScore(conversationObject, userMessage) {
 }
 
 // Functions to make conversation
-function talk(flow, userMessage, ite) {
+export function talk(flow, userMessage, ite) {
   let depth = 0;
   let heighestScore = 0;
   let selectedPath;
   let altPath;
   let responseMsg;
+  let currentObject;
+  let conver;
 
   for (let index = 0; index < flow.length; index++) {
     currentObject = flow[index];
@@ -275,21 +277,21 @@ function talk(flow, userMessage, ite) {
   };
 }
 
-function someFancyLogic(inMessage, conversationState, iteration) {
-  const responseObject = talk(
-    conversationState.conversationFlow,
-    inMessage,
-    iteration
-  );
-  console.log(responseObject.outMessageText);
-  let nextMessage = prompt("Your response: ");
-  // console.log(responseObject.updatedConversation)
-  someFancyLogic(
-    nextMessage,
-    responseObject.updatedConversation,
-    responseObject.iteration
-  );
-}
+// export function someFancyLogic(inMessage, conversationState, iteration) {
+//   const responseObject = talk(
+//     conversationState.conversationFlow,
+//     inMessage,
+//     iteration
+//   );
+//   console.log(responseObject.outMessageText);
+//   let nextMessage = prompt("Your response: ");
+//   // console.log(responseObject.updatedConversation)
+//   someFancyLogic(
+//     nextMessage,
+//     responseObject.updatedConversation,
+//     responseObject.iteration
+//   );
+// }
 
-const firstMessage = prompt("Your query: ");
-someFancyLogic(firstMessage, conversationRaw, 0);
+// const firstMessage = prompt("Your query: ");
+// someFancyLogic(firstMessage, conversationRaw, 0);

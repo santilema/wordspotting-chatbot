@@ -40,7 +40,7 @@ function App() {
     }
 
     //handle server responses
-    socket.on("answer", (data) => {
+    socket.on("bot message", (data) => {
       setMessages([...messages, { text: data, position: "left" }]);
     });
   }, [messages]);
