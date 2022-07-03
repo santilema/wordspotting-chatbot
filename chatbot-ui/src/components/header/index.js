@@ -1,7 +1,7 @@
 import React from "react";
 import image from "../../assets/background_img.jpeg";
 import styled from "styled-components";
-import {GrClose as CloseIcon} from "react-icons/gr"
+import { CgClose as CloseIcon } from "react-icons/cg";
 
 
 const HeaderWrap = styled.div`
@@ -14,8 +14,6 @@ const HeaderWrap = styled.div`
     display: flex;
     align-items: center;
     letter-spacing: 0.3px;
-    width: 100%;
-    border-bottom: 1.3px solid gray;
 
     color: white;
     padding: 0.6rem 0.6rem;
@@ -41,16 +39,25 @@ const HeaderWrap = styled.div`
   }
   .exit-icon {
     padding: 2rem;
-    color: white;
+    color: rgb(255, 255, 255) !important;
 
-    .icon {
+    .icon1 {
       font-size: 2rem;
-      color: white !important;
+      color: white;
+    }
+  }
+  @media only screen and (max-width: 540px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-space-between;
+    .exit-icon > .icon {
+      font-size: 2rem;
+      
     }
   }
 `;
 
-const Header = () => {
+const Header = ({handleClick}) => {
   return (
     <HeaderWrap>
       <div className="header">
@@ -63,7 +70,7 @@ const Header = () => {
         </div>
       </div>
       <div className="exit-icon">
-        <CloseIcon className="icon"/>
+        <CloseIcon className="icon1" onClick={handleClick} />
       </div>
     </HeaderWrap>
   );

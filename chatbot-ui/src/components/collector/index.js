@@ -81,7 +81,7 @@ const Collector = ({handleClick, handleAnswerClick, size, messages}) => {
         className="bot-body"
         style={{ visibility: size ? "visible" : "hidden" }}
       >
-        <Header />
+        <Header handleClick={handleClick}/>
         <Main messages={messages} />
         <Bottom handleAnswerClick={handleAnswerClick} />
       </div>

@@ -3,49 +3,46 @@ import styled from 'styled-components'
 
 const MainWrap = styled.div`
   .main {
-    margin: 30px 0 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
-  .messages {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+  .main-content {
+    width: 100%;
+    list-style: none;
+    padding: 0 10px;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .main-content li:first-child {
+    margin-top: .5rem;
   }
 
   .msg {
-    min-width: 60px;
-    max-width: 50%;
-    padding: 5px 7px;
-    text-align: center;
+    padding: 5px 5px;
     
+    width: auto;
+    max-width: 60%;
     font-style: 1.1em;
-    margin: 0 10px;
+    margin-bottom: 0.5rem;
   }
   .left {
     border-radius: 10px 10px 10px 0px;
     background-color: #edeced;
     text-align: left;
+    margin-left: 0.5rem;
+    margin-right: auto;
   }
   .right {
     border-radius: 10px 10px 0px 10px;
     background-color: #000066;
     color: white;
-    text-align: right;
     width: auto !important;
+    text-align: right;
+    margin-left: auto;
+    margin-right: 0.5rem;
   }
-  /* .human-messages{
-      min-width: 60px;
-      max-width: 50%;
-      padding: 5px;
-      text-align: center;
-      background-color: #000066;
-      color: #EDECED;
-      font-style: 1.1em;
-      border-radius: 10px 10px 0 10px;
-      margin: 0 10px;
-      position: relative;
-      top: 80px;
-      margin-bottom: 20px;
-  } */
 `;
 
 const Main = ({messages}) => {
@@ -64,9 +61,11 @@ const Main = ({messages}) => {
   return (
     <MainWrap>
       <div className="main">
-        <ul className="main_content">
+        <ul className="main-content">
           {messages.map((msg, i) => (
-            <li className={`msg ${msg.position}`}>{msg.text}</li>
+            <li className={`msg ${msg.position}`}>
+              <span>{msg.text}</span>
+            </li>
           ))}
         </ul>
       </div>
