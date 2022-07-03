@@ -15,36 +15,9 @@ const affirmativeResponses = [
   "right",
 ];
 
-const availableDates = ["05/07/2022", "06/07/2022"];
+const availableDates = ["05/08/2022", "06/08/2022", "07/08/2022"];
 
-const departments = [
-    {
-        name: "cardiology",
-        schedule: 'Mon - Fri 8:00 - 17:00\n Sat 8:00 - 14:00'
-    },
-    {
-        name: "neurology",
-        schedule: 'Mon - Sat 8:00 - 14:00'
-    },
-    {
-        name: "paedriatics",
-        schedule: 'Mon - Fri 8:00 - 17:00\n Sat 8:00 - 14:00'
-    },
-    {
-        name: "psychiatry",
-        schedule: 'Mon - Fri 10:00 - 19:00\n Sat 10:00 - 16:00'
-    }
-];
-
-function getDepartments(departmentsData) {
-    const deparmentsList = [];
-    departmentsData.forEach((department) => {
-        deparmentsList.push(department.name);
-    });
-    return deparmentsList;
-}
-
-const availableDepartments = getDepartments(departments);
+const availableDepartments = ['neurology', 'paedriatrics', 'psychiatry', 'cardiology']
 
 // Initial conversation tree
 const conversationRaw = {
