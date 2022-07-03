@@ -29,13 +29,14 @@ function App() {
       text: "Hello, i am the Internet Technologies Chatbot, how can i help you?",
       position: "left",
     },
+    
   ]);
   
   useEffect(() => {
     //if last message is a non-empty question, ask the server
     let lastMessage = messages[messages.length - 1];
     if (lastMessage.text !== "" && lastMessage.position === "right") {
-      socket.emit("question", lastMessage.text);
+      socket.emit("client message", lastMessage.text);
     }
 
     //handle server responses

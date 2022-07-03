@@ -16,15 +16,21 @@ const MainWrap = styled.div`
     max-width: 50%;
     padding: 5px 7px;
     text-align: center;
-    background-color: #edeced;
+    
     font-style: 1.1em;
     margin: 0 10px;
   }
   .left {
     border-radius: 10px 10px 10px 0px;
+    background-color: #edeced;
+    text-align: left;
   }
   .right {
     border-radius: 10px 10px 0px 10px;
+    background-color: #000066;
+    color: white;
+    text-align: right;
+    width: auto !important;
   }
   /* .human-messages{
       min-width: 60px;
@@ -45,16 +51,16 @@ const MainWrap = styled.div`
 const Main = ({messages}) => {
   const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    //scroll to bottom when a message is sent or received
-    if (messages.length > 1) {
-      scrollToBottom();
-    }
-  });
+  // useEffect(() => {
+  //   //scroll to bottom when a message is sent or received
+  //   if (messages.length > 1) {
+  //     scrollToBottom();
+  //   }
+  // });
 
-  function scrollToBottom() {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-  }
+  // function scrollToBottom() {
+  //   messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  // }
   return (
     <MainWrap>
       <div className="main">
