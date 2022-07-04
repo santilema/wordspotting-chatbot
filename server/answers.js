@@ -1,4 +1,4 @@
-// const prompt = require("prompt-sync")();
+const prompt = require("prompt-sync")();
 
 // pre-defined data
 const affirmativeResponses = [
@@ -20,14 +20,10 @@ const availableDates = ["05/08/2022", "06/08/2022", "07/08/2022"];
 const availableDepartments = ['neurology', 'paedriatrics', 'psychiatry', 'cardiology']
 
 // Initial conversation tree
-export const conversationRaw = {
+const conversationRaw = {
   sentencecId: "base",
-  mainPhrase: "Hi my name is Hospi, how can I help you?",
-  secondPhrase: "Is there anything else I can help with?",
-  thirdPhrase:
-    "Sorry, I don't know how to do that. Is there anything else I can help you with?",
-  expect: [],
-  level: 0,
+  mainPhrase: "Is there anything else I can help with?",
+  thirdPhrase: "Sorry, I don't know how to do that. Is there anything else I can help you with?",
   conversationFlow: [
     {
       sentenceId: "pick-up",
@@ -43,7 +39,6 @@ export const conversationRaw = {
         "study",
         "studies",
       ],
-      level: 1,
       conversationFlow: [
         {
           sentenceId: "pick-up-verify",
@@ -62,13 +57,11 @@ export const conversationRaw = {
             "yep",
             "right",
           ],
-          level: 2,
           conversationFlow: [
             {
               sentenceId: "pick-up-success",
               mainPhrase:
                 "Your results are ready. You can pick them up on reception from 8:00 to 17:00 everyday",
-              level: 3,
               direct: "base",
             },
           ],
@@ -92,7 +85,6 @@ export const conversationRaw = {
         "direction",
         "address",
       ],
-      level: 1,
       direct: "base",
     },
     {
@@ -113,7 +105,6 @@ export const conversationRaw = {
         "week",
         "month",
       ],
-      level: 1,
       conversationFlow: [
         {
           sentenceId: "appo-type",
@@ -131,7 +122,6 @@ export const conversationRaw = {
             "yep",
             "right",
           ],
-          level: 2,
           conversationFlow: [
             {
               sentenceId: "appo-avail",
@@ -141,12 +131,10 @@ export const conversationRaw = {
                 {
                   sentenceId: "appo-email",
                   mainPhrase: `Great! To finish with your booking I'll have to ask you for an email`,
-                  level: 4,
                   conversationFlow: [
                     {
                       sentenceId: "appo-success",
                       mainPhrase: "Your appointment was registered :)",
-                      level: 5,
                       direct: "base",
                     },
                   ],
@@ -175,13 +163,17 @@ function checkEmail(email) {
 // };
 
 function assignScore(conversationObject, userMessage) {
-  console.log(conversationObject.sentenceId);
   let wordsToMatch;
   let score = 0;
 
   switch (conversationObject.sentenceId) {
+    case "appo-avail":
+      wordsToMatch = availableDepartments;
+      break;
+
     case "pick-up-verify":
       wordsToMatch = affirmativeResponses;
+      break;
 
     case "pick-up-success":
         if (checkEmail(userMessage)) {
@@ -191,12 +183,11 @@ function assignScore(conversationObject, userMessage) {
 
     case "appo-type":
       wordsToMatch = affirmativeResponses;
-
-    case "appo-avail":
-      wordsToMatch = availableDepartments;
+      break;
 
     case "appo-email":
       wordsToMatch = availableDates;
+      break;
 
     case "appo-success":
       if (checkEmail(userMessage)) {
@@ -207,11 +198,15 @@ function assignScore(conversationObject, userMessage) {
     default:
       wordsToMatch = conversationObject.expect;
   }
+
+  if (typeof wordsToMatch === 'undefined') {
+    wordsToMatch = [];
+  }
+
   const messageWords = userMessage
     .toLowerCase()
     .replace(/[,.?!]/, "")
     .split(" ");
-
   messageWords.forEach((word) => {
     if (wordsToMatch.includes(word)) {
       score += 1;
@@ -222,7 +217,7 @@ function assignScore(conversationObject, userMessage) {
 }
 
 // Functions to make conversation
-export function talk(flow, userMessage, ite) {
+function talk(flow, userMessage, ite) {
   let depth = 0;
   let heighestScore = 0;
   let selectedPath;
@@ -256,8 +251,13 @@ export function talk(flow, userMessage, ite) {
       altPath.mainPhrase = altPath.secondPhrase;
       conver = { conversationFlow: flow };
     } else {
-      responseMsg = selectedPath.mainPhrase;
-      conver = selectedPath;
+      if (typeof selectedPath.conversationFlow === 'undefined') {
+        responseMsg = selectedPath.mainPhrase + `\n${conversationRaw.mainPhrase}`;
+        conver = conversationRaw;
+      } else {
+        responseMsg = selectedPath.mainPhrase;
+        conver = selectedPath;
+      }
     }
   } else {
     if (ite < 2) {
@@ -277,21 +277,21 @@ export function talk(flow, userMessage, ite) {
   };
 }
 
-// export function someFancyLogic(inMessage, conversationState, iteration) {
-//   const responseObject = talk(
-//     conversationState.conversationFlow,
-//     inMessage,
-//     iteration
-//   );
-//   console.log(responseObject.outMessageText);
-//   let nextMessage = prompt("Your response: ");
-//   // console.log(responseObject.updatedConversation)
-//   someFancyLogic(
-//     nextMessage,
-//     responseObject.updatedConversation,
-//     responseObject.iteration
-//   );
-// }
+function someFancyLogic(inMessage, conversationState, iteration) {
+  const responseObject = talk(
+    conversationState.conversationFlow,
+    inMessage,
+    iteration
+  );
+  console.log(responseObject.outMessageText);
+  let nextMessage = prompt("Your response: ");
+  // console.log(responseObject.updatedConversation)
+  someFancyLogic(
+    nextMessage,
+    responseObject.updatedConversation,
+    responseObject.iteration
+  );
+}
 
-// const firstMessage = prompt("Your query: ");
-// someFancyLogic(firstMessage, conversationRaw, 0);
+const firstMessage = prompt("Your query: ");
+someFancyLogic(firstMessage, conversationRaw, 0);
