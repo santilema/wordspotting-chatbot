@@ -19,12 +19,6 @@ const CollectorWrap = styled.div`
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    /* transition: all 0.5s ease; */
-  }
-  .part-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
 
   .icon {
@@ -67,8 +61,8 @@ const CollectorWrap = styled.div`
 
     .bot-body {
       border-radius: 0;
-      width: 100vw !important;
-      height: 100vh !important;
+      width: 100vw ;
+      height: 100vh;
       z-index:99;
     }
   }

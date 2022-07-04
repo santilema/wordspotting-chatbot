@@ -2,7 +2,7 @@ import Collector from "./components/collector";
 import Info from "./components/info";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import bgImage from "./assets/main_background.png";
+import bgImage from "./assets/hospital_image.jpeg";
 
 import { io } from "socket.io-client";
 const socket = io("ws://localhost:3000");
@@ -26,10 +26,9 @@ function App() {
   const [size, setSize] = useState(false); // to resize the chat body
   const [messages, setMessages] = useState([
     {
-      text: "Hello, i am the Internet Technologies Chatbot, how can i help you?",
+      text: "Hello, I am the Hospital ChatBot, how can I help You?",
       position: "left",
     },
-    
   ]);
   
   useEffect(() => {

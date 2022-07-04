@@ -11,7 +11,7 @@ const InfoWrap = styled.div`
   z-index: 1;
   background-color: #000044;
   text-align: center;
-  opacity: 0.8;
+  opacity: 0.6;
   color: white;
 `;
 

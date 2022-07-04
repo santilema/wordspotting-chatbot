@@ -7,6 +7,7 @@ const BottomWrap = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
+  z-index: 999;
 
   .bottom-body {
     display: flex;
@@ -18,11 +19,12 @@ const BottomWrap = styled.div`
     flex: 3;
     display: flex;
     background-color: #fff;
-    padding-left: 1rem;
+    padding: 1rem;
     border-top: 1px solid #000066;
   }
 
   input {
+    width: 100%;
     border: none;
     outline: none;
   }
