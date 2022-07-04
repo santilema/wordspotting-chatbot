@@ -5,10 +5,15 @@ import { CgClose as CloseIcon } from "react-icons/cg";
 
 
 const HeaderWrap = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #000066;
+  z-index: 100;
 
   .header {
     display: flex;

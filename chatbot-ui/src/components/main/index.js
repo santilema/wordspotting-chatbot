@@ -3,26 +3,41 @@ import styled from 'styled-components'
 
 const MainWrap = styled.div`
   .main {
+    /* scroll bar hide */
+    -ms-overflow-style: none; // IE 10+
+    overflow: -moz-scrollbars-none;
+
+    position: absolute;
+    left: -1.6rem;
+    right: 0.5rem;
+    top: 100px;
+    bottom: 3rem;
     margin: 0 !important;
-    padding: 0 !important;
+    padding-left: 0 !important;
+    height: auto;
+    overflow: auto;
+  }
+  
+  /* scroll bar hide */
+  .main::-webkit-scrollbar {
+    display: none;
   }
 
   .main-content {
-    width: 100%;
+    width: auto;
     list-style: none;
-    padding: 0 10px;
     margin: 0 !important;
-    padding: 0 !important;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .main-content li:first-child {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 
   .msg {
     padding: 5px 5px;
-    
-    width: auto;
+    min-width: 0;
     max-width: 60%;
     font-style: 1.1em;
     margin-bottom: 0.5rem;
@@ -38,7 +53,6 @@ const MainWrap = styled.div`
     border-radius: 10px 10px 0px 10px;
     background-color: #000066;
     color: white;
-    width: auto !important;
     text-align: right;
     margin-left: auto;
     margin-right: 0.5rem;
@@ -48,16 +62,16 @@ const MainWrap = styled.div`
 const Main = ({messages}) => {
   const messagesEndRef = useRef(null);
 
-  // useEffect(() => {
-  //   //scroll to bottom when a message is sent or received
-  //   if (messages.length > 1) {
-  //     scrollToBottom();
-  //   }
-  // });
+  useEffect(() => {
+    //scroll to bottom when a message is sent or received
+    if (messages.length > 1) {
+      scrollToBottom();
+    }
+  });
 
-  // function scrollToBottom() {
-  //   messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-  // }
+  function scrollToBottom() {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }
   return (
     <MainWrap>
       <div className="main">
@@ -67,6 +81,7 @@ const Main = ({messages}) => {
               <span>{msg.text}</span>
             </li>
           ))}
+          <li ref={messagesEndRef} />
         </ul>
       </div>
     </MainWrap>
