@@ -67,10 +67,9 @@ const MainWrap = styled.div`
     cursor: pointer;
     margin-bottom: 0.5rem;
   }
-
 `;
 
-const Main = ({messages}) => {
+const Main = ({messages, handleAnswerClick}) => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -88,18 +87,14 @@ const Main = ({messages}) => {
       <div className="main">
         <ul className="main-content">
           {messages.map((msg, i) => (
-            <>
+            <div>
               <li className={`msg ${msg.position}`}>
                 <span>{msg.text}</span>
               </li>
-              {
-                msg.options ? <>
-                  <li className="option">Neurology</li>
-                  <li className="option">Neurology</li>
-                </> : ""
-              }
-              
-            </>
+              {msg.list?.map((item) => (
+                <li className="option" onClick={() => handleAnswerClick(item)}>{item}</li>
+              ))}
+            </div>
           ))}
 
           <li ref={messagesEndRef} />

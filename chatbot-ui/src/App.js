@@ -43,8 +43,12 @@ function App() {
     socket.on("bot message", (data) => {
       console.log(data)
       const tempData = data.split("#")
-      const tempList = tempData[1].split(",")
-      setMessages([...messages, { text: tempData[0], list: tempList,position: "left" }]);
+      if(tempData.length === 1){
+        setMessages([...messages, { text: tempData[0], position: "left" }]);
+      }else{
+        const tempList = tempData[1].split(",");
+        setMessages([...messages, { text: tempData[0], list: tempList, position: "left" }]);
+      }
     });
   }, [messages]);
 
@@ -54,10 +58,10 @@ function App() {
   };
 
   const handleAnswerClick = (msg) => {
+    console.log(msg)
     if (msg !== ""){
       setMessages([...messages, { text: msg, position: "right" }]);
     }
-      
   }
 
   return (

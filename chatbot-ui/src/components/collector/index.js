@@ -76,7 +76,7 @@ const Collector = ({handleClick, handleAnswerClick, size, messages}) => {
         style={{ visibility: size ? "visible" : "hidden" }}
       >
         <Header handleClick={handleClick}/>
-        <Main messages={messages} />
+        <Main messages={messages} handleAnswerClick={handleAnswerClick}/>
         <Bottom handleAnswerClick={handleAnswerClick} />
       </div>
       <div className="icon">
