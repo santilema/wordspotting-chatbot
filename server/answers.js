@@ -47,9 +47,7 @@ function assignScore(conversationObject, userMessage) {
       wordsToMatch = indexes.concat(availableDepartments);
       data = registerInput(availableDepartments, userMessage);
       if (typeof data === "string") {
-        conversationObject.mainPhrase = `These are the available dates for ${data}:\n${printOptions(
-          availableDates
-        )}\nPlease, select one date`;
+        conversationObject.mainPhrase = `These are the available dates for ${data}:#${availableDates}`;
       }
       break;
 
@@ -335,15 +333,11 @@ export const conversationRaw = {
         },
         {
           sentenceId: "appo-type",
-          mainPhrase: `The following departments are taking online turns:\n${printOptions(
-            availableDepartments
-          )}\nFor which would you like to book yout appointment?`,
+          mainPhrase: `These are the departments offering online turns. Please, choose one:#${availableDepartments}`,
           conversationFlow: [
             {
               sentenceId: "appo-avail",
-              mainPhrase: `These are the available dates:\n${printOptions(
-                availableDates
-              )}\nPlease, select one date`,
+              mainPhrase: `These are the available dates, please choose one:#${availableDates}`,
               level: 3,
               conversationFlow: [
                 {
