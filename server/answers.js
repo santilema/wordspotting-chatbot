@@ -116,7 +116,7 @@ function printOptions(list) {
     if (word + 1 === list.length) {
       prettyString = prettyString + `${word}. ` + `${list[word]}`;
     } else {
-      prettyString = prettyString + `${word}. ` + `${list[word]}\n`;
+      prettyString = prettyString + `${word}. ` + `${list[word]}/n`;
     }
   }
   return prettyString;
@@ -179,6 +179,47 @@ export const conversationRaw = {
       sentenceId: "hello",
       mainPhrase: "Hello! Can I help you with something?",
       expect: ["hello", "hi", "morning", "evening", "good"],
+    },
+    {
+      sentenceId: "covid",
+      expect: ["covid", "sars", "cov", "covid19"],
+      mainPhrase: "Are you experiencing COVID symphtoms?",
+      conversationFlow:[
+        {
+          sentenceId: "covid-fail",
+          mainPhrase: "Oh, maybe I didn't get that. Can you please reformulate?",
+          expect: negativeResponses
+        },
+        {
+          sentenceId: "covid-symptoms",
+          mainPhrase: "Are you having problems to breath or another emergency situation?",
+          expect: affirmativeResponses,
+          conversationFlow: [
+            {
+              sentenceId: "covid-emergency",
+              mainPhrase: "Please call 102 for an ambulance as soon as possible. Immediate medical attention is required.",
+              expect: affirmativeResponses
+            },
+            {
+              sentenceId: "covid-not-emergency",
+              mainPhrase: "Have you been fully vaccinated against COVID?",
+              expect: negativeResponses,
+              conversationFlow: [
+                {
+                  sentenceId: "covid-vaccinated",
+                  mainPhrase: "Isolate until you test negative. Take measures to relieve fever, relax and play some videogames. Everything will be fine.",
+                  expect: affirmativeResponses
+                },
+                {
+                  sentenceId: "covid-non-vaccinated",
+                  expect: negativeResponses,
+                  mainPhrase: "Keep track on your fever and breathing activity. Try to regulate fever and isolate yourself as much as possible. If you develop issues to breathe please call this line immediatly +49-0000-0000."
+                }
+              ]
+            }
+          ]
+        },
+      ]
     },
     {
       sentenceId: "emergency",
