@@ -59,15 +59,24 @@ const Bottom = ({handleAnswerClick}) => {
     <BottomWrap>
       <div className="bottom-body">
         <div className="input-wrap">
-          <input type="text" name="input" placeholder={msg === "" && "Write your message"} value={msg} onChange={handleChange}/>
+          <input
+            type="text"
+            name="input"
+            placeholder={msg === "" && "Write your message"}
+            value={msg}
+            onChange={handleChange}
+          />
         </div>
-        <div className="btn">
+        <div
+          className="btn"
+          onClick={() => {
+            handleAnswerClick(msg);
+            setMsg("");
+            console.log(msg);
+          }}
+        >
           <Send />
-          <button onClick={() => {
-            handleAnswerClick(msg) 
-            setMsg('')
-            console.log(msg)
-          }}>Send</button>
+          <button>Send</button>
         </div>
       </div>
     </BottomWrap>
