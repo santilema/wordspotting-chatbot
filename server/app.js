@@ -17,7 +17,6 @@ io.on('connection', (socket) => {
 
     socket.on('client message', (msg) => {
         console.log('message: ' + msg);
-        console.log(currentCoversation.conversationFlow);
         let responseObject = talk(currentCoversation.conversationFlow, msg, iteration);
         smartAnswer = responseObject.outMessageText;
         socket.emit('bot message', smartAnswer);
