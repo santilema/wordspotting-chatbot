@@ -28,6 +28,7 @@ function App() {
     {
       text: "Hello, I am the Hospital ChatBot, how can I help You?",
       position: "left",
+      list: []
     },
   ]);
   
@@ -40,7 +41,10 @@ function App() {
 
     //handle server responses
     socket.on("bot message", (data) => {
-      setMessages([...messages, { text: data, position: "left" }]);
+      console.log(data)
+      const tempData = data.split("#")
+      const tempList = tempData[1].split(",")
+      setMessages([...messages, { text: tempData[0], list: tempList,position: "left" }]);
     });
   }, [messages]);
 

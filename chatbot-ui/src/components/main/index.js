@@ -57,6 +57,17 @@ const MainWrap = styled.div`
     margin-left: auto;
     margin-right: 0.5rem;
   }
+  .option {
+    width: 60%;
+    padding: .4rem;
+    background: #fff;
+    border: 1px solid blue;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+  }
+
 `;
 
 const Main = ({messages}) => {
@@ -77,10 +88,20 @@ const Main = ({messages}) => {
       <div className="main">
         <ul className="main-content">
           {messages.map((msg, i) => (
-            <li className={`msg ${msg.position}`}>
-              <span>{msg.text}</span>
-            </li>
+            <>
+              <li className={`msg ${msg.position}`}>
+                <span>{msg.text}</span>
+              </li>
+              {
+                msg.options ? <>
+                  <li className="option">Neurology</li>
+                  <li className="option">Neurology</li>
+                </> : ""
+              }
+              
+            </>
           ))}
+
           <li ref={messagesEndRef} />
         </ul>
       </div>
