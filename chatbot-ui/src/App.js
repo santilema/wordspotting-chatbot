@@ -50,7 +50,10 @@ function App() {
   };
 
   const handleAnswerClick = (msg) => {
-    setMessages([...messages, {text: msg, position: "right"}])
+    if (msg !== ""){
+      setMessages([...messages, { text: msg, position: "right" }]);
+    }
+      
   }
 
   return (
