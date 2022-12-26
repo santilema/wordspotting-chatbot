@@ -2,7 +2,7 @@ import { talk, conversationRaw } from './answers.js';
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
-const port = 3000;
+const port = 5500;
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
