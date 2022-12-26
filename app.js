@@ -2,6 +2,8 @@ import { talk, conversationRaw } from './answers.js';
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
+import path from 'path';
+
 const port = 8080;
 const app = express();
 const server = http.createServer(app);

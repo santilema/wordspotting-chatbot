@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Changing directory to UI..."
-cd ui
+cd chatbor-ui
 
 echo "Install React Dependencies..."
 npm install --
