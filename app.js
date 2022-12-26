@@ -2,7 +2,7 @@ import { talk, conversationRaw } from './answers.js';
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
-const port = 5500;
+const port = 8080;
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
@@ -10,6 +10,12 @@ const io = new Server(server);
 let smartAnswer;
 let currentCoversation = conversationRaw;
 let iteration;
+
+app.use("/static", express.static("build/static/"));
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(path.resolve(), "/build/index.html"));
+});
 
 io.on('connection', (socket) => {
     iteration = 0;

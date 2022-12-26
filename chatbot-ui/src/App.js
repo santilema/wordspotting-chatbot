@@ -5,7 +5,7 @@ import styled from "styled-components";
 import bgImage from "./assets/hospital_image.jpeg";
 
 import { io } from "socket.io-client";
-const socket = io("ws://localhost:3000");
+const socket = io();
 
 const AppWrapper = styled.div`
   height: 100vh;
