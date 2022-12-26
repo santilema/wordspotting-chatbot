@@ -9,15 +9,15 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-let smartAnswer;
-let currentCoversation = conversationRaw;
-let iteration;
-
 app.use("/static", express.static("build/static/"));
 
 app.get("/", function (req, res) {
   res.sendFile(path.join(path.resolve(), "/build/index.html"));
 });
+
+let smartAnswer;
+let currentCoversation = conversationRaw;
+let iteration;
 
 io.on('connection', (socket) => {
     iteration = 0;
