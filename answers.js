@@ -20,10 +20,12 @@ const negativeResponses = ["no", "nope", "don't", "not", "negative"];
 const availableDates = ["05/08/2022", "06/08/2022", "07/08/2022"];
 
 const availableDepartments = [
-  "neurology",
-  "paedriatrics",
-  "psychiatry",
-  "cardiology",
+  "Credit Department",
+  "Customer Support",
+  "Premium Services",
+  "Investment Department",
+  "Insurance Department",
+  "Fraud Department"
 ];
 
 // Helper functions
