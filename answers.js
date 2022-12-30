@@ -45,8 +45,7 @@ function assignScore(conversationObject, userMessage) {
   // Define what to do for each special conversation state
   switch (conversationObject.sentenceId) {
     case "appo-avail":
-      indexes = listIndexes(availableDepartments);
-      wordsToMatch = indexes.concat(availableDepartments);
+      wordsToMatch = availableDepartments
       data = registerInput(availableDepartments, userMessage);
       if (typeof data === "string") {
         conversationObject.mainPhrase = `These are the available dates for ${data}:#${availableDates}`;
@@ -81,12 +80,21 @@ function assignScore(conversationObject, userMessage) {
         conversationObject.mainPhrase = `Your appointment was registered :)\nDetails will be sent to ${userMessage}`;
         return { score: 100, data: { email: userMessage } };
       }
+      break;
 
     case "visit-call":
       if (userMessage.length > 2) return { score: 100 };
+      break;
 
     case "visit-number":
       if (userMessage.length > 4) return { score: 100 };
+      break;
+
+    case "create-account-email-success":
+      if (checkEmail(userMessage)) {
+        conversationObject.mainPhrase = `You will be contacted shortly to ${userMessage} regarding your account creation :)`;
+        return { score: 100, data: { email: userMessage } };
+      }
 
     default:
       wordsToMatch = conversationObject.expect;
@@ -181,118 +189,9 @@ export const conversationRaw = {
       expect: ["hello", "hi", "morning", "evening", "good"],
     },
     {
-      sentenceId: "covid",
-      expect: ["covid", "sars", "cov", "covid19"],
-      mainPhrase: "Are you experiencing COVID symphtoms?",
-      conversationFlow:[
-        {
-          sentenceId: "covid-fail",
-          mainPhrase: "Oh, maybe I didn't get that. Can you please reformulate?",
-          expect: negativeResponses
-        },
-        {
-          sentenceId: "covid-symptoms",
-          mainPhrase: "Are you having problems to breath or another emergency situation?",
-          expect: affirmativeResponses,
-          conversationFlow: [
-            {
-              sentenceId: "covid-emergency",
-              mainPhrase: "Please call 102 for an ambulance as soon as possible. Immediate medical attention is required.",
-              expect: affirmativeResponses
-            },
-            {
-              sentenceId: "covid-not-emergency",
-              mainPhrase: "Have you been fully vaccinated against COVID?",
-              expect: negativeResponses,
-              conversationFlow: [
-                {
-                  sentenceId: "covid-vaccinated",
-                  mainPhrase: "Isolate until you test negative. Take measures to relieve fever, relax and play some videogames. Everything will be fine.",
-                  expect: affirmativeResponses
-                },
-                {
-                  sentenceId: "covid-non-vaccinated",
-                  expect: negativeResponses,
-                  mainPhrase: "Keep track on your fever and breathing activity. Try to regulate fever and isolate yourself as much as possible. If you develop issues to breathe please call this line immediatly +49-0000-0000."
-                }
-              ]
-            }
-          ]
-        },
-      ]
-    },
-    {
-      sentenceId: "emergency",
-      expect: ["urgency", "emergency", "ambulance"],
-      mainPhrase:
-        "If you have an emergency please call an ambulance (tel: 102).\nFor urgencies you can come without appointment to the Urgencies Department.",
-    },
-    {
-      sentenceId: "visit",
-      expect: ["visit", "patient"],
-      mainPhrase: "What's the name of this patient?",
-      conversationFlow: [
-        {
-          sentenceId: "visit-call",
-          mainPhrase:
-            "Unfortunately we can't give information about patients. But leave us a telephone number and we will contact you later",
-          conversationFlow: [
-            {
-              sentenceId: "visit-call-fail",
-              expect: negativeResponses,
-              mainPhrase:
-                "You can also call to reception to schedule a visit +49-0000-0000",
-            },
-            {
-              sentenceId: "visit-number",
-              mainPhrase:
-                "We will check up this data and get in contact with you in the next 24 hours",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      sentenceId: "pick-up",
-      mainPhrase: "Do you have to pick-up some study results?",
-      secondPhrase: "You have to collect some results, is that right?",
-      expect: [
-        "pick",
-        "up",
-        "pickup",
-        "collect",
-        "results",
-        "result",
-        "study",
-        "studies",
-      ],
-      conversationFlow: [
-        {
-          sentenceId: "pick-up-fail",
-          mainPhrase:
-            "Oh, I didn,t get that well then. Could you try to reformulate?",
-          expect: negativeResponses,
-        },
-        {
-          sentenceId: "pick-up-verify",
-          mainPhrase:
-            "please, write down your email to check if your results are available already",
-          expect: affirmativeResponses,
-          conversationFlow: [
-            {
-              sentenceId: "pick-up-success",
-              mainPhrase:
-                "Your results are ready. You can pick them up on reception from 8:00 to 17:00 everyday",
-              direct: "base",
-            },
-          ],
-        },
-      ],
-    },
-    {
       sentenceId: "loc",
       mainPhrase:
-        "The hospital is located on Example Street 123. Attention 24 hours for emergencies. Please, consult opening hours for specific departments",
+        "Our branch located on Example Street 123 opens Monday to Friday from 8 to 14 hours. Please, make sure to have your appointment booked before coming.",
       expect: [
         "street",
         "location",
@@ -319,7 +218,6 @@ export const conversationRaw = {
         "booking",
         "book",
         "date",
-        "session",
         "when",
         "available",
         "free",
@@ -330,12 +228,13 @@ export const conversationRaw = {
         {
           sentenceId: "appo-fail",
           mainPhrase:
-            "Oh, I probably got that wrong. Could you try to reformulate?",
+            "Oh, I probably got that wrong then. Could you please reformulate?",
           expect: negativeResponses,
         },
         {
           sentenceId: "appo-type",
-          mainPhrase: `These are the departments offering online turns. Please, choose one:#${availableDepartments}`,
+          mainPhrase: `These are the departments offering online appointments. Please, choose one:#${availableDepartments}`,
+          expect: affirmativeResponses,
           conversationFlow: [
             {
               sentenceId: "appo-avail",
@@ -359,6 +258,28 @@ export const conversationRaw = {
         },
       ],
     },
+    {
+      sentenceId: "create-account",
+      mainPhrase: "Do you want to create a new account?",
+      expect: ["account", "new", "create", "register", "sign", "open"],
+      conversationFlow: [
+        {
+          sentenceId: "create-account-fail",
+          mainPhrase: "Oh, I probably got that wrong then. Could you try to reformulate?",
+          expect: negativeResponses,
+        },
+        {
+          sentenceId: "create-account-success",
+          mainPhrase: "Great! To finish with your account creation I'll have to ask you for an email",
+          conversationFlow: [
+            {
+              sentenceId: "create-account-email-success",
+              direct: "base",
+            },
+          ],
+        },
+      ],
+    }
   ],
 };
 
@@ -374,8 +295,8 @@ export function talk(flow, userMessage, ite) {
 
   for (let index = 0; index < flow.length; index++) {
     currentObject = flow[index];
-    let analyseMessage = assignScore(currentObject, userMessage);
-    let score = analyseMessage.score;
+    let analysedMessage = assignScore(currentObject, userMessage);
+    let score = analysedMessage.score;
 
     if (score > heighestScore) {
       selectedPath = currentObject;
