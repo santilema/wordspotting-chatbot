@@ -4,10 +4,16 @@ import http from 'http';
 import { Server } from 'socket.io';
 import path from 'path';
 
-const port = 3000;
+const port = 8080;
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+app.use("/static", express.static("build/static/"));
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(path.resolve(), "/build/index.html"));
+});
 
 app.use("/static", express.static("build/static/"));
 
