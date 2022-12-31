@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "bank_chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/griffins-thd/bank-chatbot-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/griffins-thd/bank-chatbot-app/issues"
+  },
+  "homepage": "https://github.com/griffins-thd/bank-chatbot-app/#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "prompt-sync": "^4.2.0",
+    "socket.io": "^4.5.1"
+  }
+}
