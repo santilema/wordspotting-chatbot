@@ -20,12 +20,12 @@ const negativeResponses = ["no", "nope", "don't", "not", "negative"];
 const availableDates = ["05/08/2022", "06/08/2022", "07/08/2022"];
 
 const availableDepartments = [
-  "Credit Department",
-  "Customer Support",
-  "Premium Services",
-  "Investment Department",
-  "Insurance Department",
-  "Fraud Department"
+  "credit department",
+  "customer support",
+  "premium services",
+  "investment department",
+  "insurance department",
+  "fraud department"
 ];
 
 // Helper functions
@@ -45,10 +45,10 @@ function assignScore(conversationObject, userMessage) {
   // Define what to do for each special conversation state
   switch (conversationObject.sentenceId) {
     case "appo-avail":
-      wordsToMatch = availableDepartments
-      data = registerInput(availableDepartments, userMessage);
-      if (typeof data === "string") {
-        conversationObject.mainPhrase = `These are the available dates for ${data}:#${availableDates}`;
+      let lowerCaseMessage = userMessage.toLowerCase();
+      if (availableDepartments.includes(lowerCaseMessage)) {
+        conversationObject.mainPhrase = `Great! These are the available dates for ${lowerCaseMessage}:#${availableDates}`;
+        return { score: 100, data: { department: lowerCaseMessage } };
       }
       break;
 
@@ -95,6 +95,41 @@ function assignScore(conversationObject, userMessage) {
         conversationObject.mainPhrase = `You will be contacted shortly to ${userMessage} regarding your account creation :)`;
         return { score: 100, data: { email: userMessage } };
       }
+      break;
+
+    case "close-account-email-success":
+      if (checkEmail(userMessage)) {
+        conversationObject.mainPhrase = `You will be contacted shortly to ${userMessage} regarding your account closure`;
+        return { score: 100, data: { email: userMessage } };
+      }
+      break;
+
+    case "modify-account-email-success":
+      if (checkEmail(userMessage)) {
+        return { score: 100, data: { email: userMessage } };
+      }
+      break;
+
+    case "modify-account-contact-phone-success":
+      if (userMessage.length > 4) { //could be replaced with a regEx to match phone numbers
+        conversationObject.mainPhrase = `Your phone number was updated to ${userMessage}`;
+        return { score: 100, data: { phone: userMessage } };
+      }
+      break;
+
+    case "modify-account-contact-address-success":
+      if (userMessage.length > 4) { //Maps API could be used to validate the address
+        conversationObject.mainPhrase = `Your address was updated to ${userMessage}`;
+        return { score: 100, data: { address: userMessage } };
+      }
+      break;
+
+    case "modify-account-contact-email-success":
+      if (checkEmail(userMessage)) {
+        conversationObject.mainPhrase = `Your email was updated to ${userMessage}`;
+        return { score: 100, data: { email: userMessage } };
+      }
+      break;
 
     default:
       wordsToMatch = conversationObject.expect;
@@ -217,12 +252,6 @@ export const conversationRaw = {
         "consultation",
         "booking",
         "book",
-        "date",
-        "when",
-        "available",
-        "free",
-        "week",
-        "month",
       ],
       conversationFlow: [
         {
@@ -239,7 +268,6 @@ export const conversationRaw = {
             {
               sentenceId: "appo-avail",
               mainPhrase: `These are the available dates, please choose one:#${availableDates}`,
-              level: 3,
               conversationFlow: [
                 {
                   sentenceId: "appo-email",
@@ -271,14 +299,109 @@ export const conversationRaw = {
         {
           sentenceId: "create-account-success",
           mainPhrase: "Great! To finish with your account creation I'll have to ask you for an email",
+          expect: affirmativeResponses,
           conversationFlow: [
             {
               sentenceId: "create-account-email-success",
-              direct: "base",
+              direct: "base"
             },
           ],
         },
       ],
+    },
+    {
+      sentenceId: "close-account",
+      mainPhrase: "Do you want to close your account?",
+      expect: ["close", "delete", "remove", "account"],
+      conversationFlow: [
+        {
+          sentenceId: "close-account-fail",
+          mainPhrase: "Oh, I probably got that wrong then. Could you try to reformulate?",
+          expect: negativeResponses,
+        },
+        {
+          sentenceId: "close-account-success",
+          mainPhrase: "I am sorry to hear that. To start with your account closure I'll have to ask you for an email",
+          expect: affirmativeResponses,
+          conversationFlow: [
+            {
+              sentenceId: "close-account-email-success",
+              direct: "base"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      sentenceId: "modify-account",
+      mainPhrase: "Do you want to modify your account?",
+      expect: ["modify", "change", "update", "account"],
+      conversationFlow: [
+        {
+          sentenceId: "modify-account-fail",
+          mainPhrase: "Oh, I probably got that wrong then. Could you try to reformulate?",
+          expect: negativeResponses,
+        },
+        {
+          sentenceId: "modify-account-success",
+          mainPhrase: "Great! To start with your account modification I'll have to ask you for an email",
+          expect: affirmativeResponses,
+          conversationFlow: [
+            {
+              sentenceId: "modify-account-email-success",
+              mainPhrase: "I can help you correcting your contact information or upgrading your account. Which one do you want to do?",
+              conversationFlow: [
+                {
+                  sentenceId: "modify-account-contact",
+                  mainPhrase: "I can help you correcting your phone number, address or your email. Which one do you want to do?",
+                  expect: ["contact", "information", "phone", "address", "email"],
+                  conversationFlow: [
+                    {
+                      sentenceId: "modify-account-contact-phone",
+                      mainPhrase: "Please, tell me your new phone number",
+                      expect: ["phone", "number"],
+                      conversationFlow: [
+                        {
+                          sentenceId: "modify-account-contact-phone-success",
+                          direct: "base"
+                        }
+                      ]
+                    },
+                    {
+                      sentenceId: "modify-account-contact-address",
+                      mainPhrase: "Please, tell me your new address",
+                      expect: ["address"],
+                      conversationFlow: [
+                        {
+                          sentenceId: "modify-account-contact-address-success",
+                          direct: "base"
+                        }
+                      ]
+                    },
+                    {
+                      sentenceId: "modify-account-contact-email",
+                      mainPhrase: "Please, tell me your new email",
+                      expect: ["email", "mail"],
+                      conversationFlow: [
+                        {
+                          sentenceId: "modify-account-contact-email-success",
+                          direct: "base"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  sentenceId: "modify-account-upgrade",
+                  expect: ["upgrade", "improve", "account"],
+                  mainPhrase: "Okay, an agent will get in touch with you to help you with your account upgrade",
+                  direct: "base"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
 };
