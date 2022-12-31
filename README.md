@@ -1,32 +1,20 @@
+# Banking Chatbot
 
-# Hospital Chatbot
+Students: 
+| Name | Matriculation number |
+| --- | --- |
+| Bahtiyorjon Arslonbekov | 22108177 |
+| Omar Kamel | 807267 |
+| Preet koshiya | 22110463 |
+| Santiago Xavier Lema | 22108098 |
 
+## Azure website
 
-### Hints to work with the repo without a problem:
+An online instance of the chatbot can be founded [here](https://bankappointment.azurewebsites.net/)
 
- Everyone has his/her own branch, We all work inside our own branches.
+## How to use locally
 
- 1. Clone the repo first:
- ``` 
- git clone "your branch url" 
- ```
- 3. Switch to your branch by:
-  ```git checkout <your branch name> ```
- 4. Do your changes.
- 5. To push your changes to the repo follow the steps:
-  * git
-  ```sh
-            git add .
-            git commit -m "name your commit"
-            git push origin "branch name"
-  ```
-            
-
-
-
-### REACT app 
- The app was created with the help of ``` npx create-react-app <app name> ```
- #### How to run:
- first install all dependencies, in your terminal(make sure you are inside of react app directory) type "npm i" or "npm install"
-
-* to run the react app run "npm start" in the app directory
+1. Clone the repository.
+2. run `npm install` in the root of the repository/
+3. Once the packages are installed just run the script `npm run start`
+4. Go with your browser to `localhost:8080`
