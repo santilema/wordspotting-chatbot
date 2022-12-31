@@ -21,7 +21,7 @@ function App() {
   const [size, setSize] = useState(false); // to resize the chat body
   const [messages, setMessages] = useState([
     {
-      text: "Hello, I am the Banking ChatBot, how can I help You?",
+      text: "Hello, I am the Bank ChatBot, how can I help You?",
       position: "left",
       list: []
     },
