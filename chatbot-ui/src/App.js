@@ -2,7 +2,6 @@ import Collector from "./components/collector";
 import Info from "./components/info";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import bgImage from "./assets/hospital_image.jpeg";
 
 import { io } from "socket.io-client";
 const socket = io();
@@ -13,10 +12,6 @@ const AppWrapper = styled.div`
   display: flex;
   justify-content: end;
   align-items: end;
-  background-image: url("${bgImage}");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   position: relative;
 `;
 

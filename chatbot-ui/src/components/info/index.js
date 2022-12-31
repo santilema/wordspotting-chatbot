@@ -18,8 +18,8 @@ const InfoWrap = styled.div`
 const Info = () => {
   return (
     <InfoWrap>
-      <h1>INTERNET TECHNOLOGIES</h1>
-      <h3>HOSPITAL APPOINTMENT CHATBOT</h3>
+      <h1>Internet Technologies</h1>
+      <h3>Bank appointment chatbot</h3>
       <p>Team: GRIFFINS</p>
       <Animation />
     </InfoWrap>
