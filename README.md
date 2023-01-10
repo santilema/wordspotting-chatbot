@@ -10,7 +10,7 @@ Students:
 
 ## Azure website
 
-An online instance of the chatbot can be founded [here](https://bankappointment.azurewebsites.net/)
+An online instance of the chatbot can be founded [here](https://bank-chatbot.azurewebsites.net/)
 
 ## How to use locally
 
